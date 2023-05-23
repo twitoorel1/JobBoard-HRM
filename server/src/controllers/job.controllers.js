@@ -56,16 +56,17 @@ exports.getAllJobs = getAllJobs = async (req, res) => {
   }
 }
 
-exports.getJobById = async (req, res) => {
+exports.getJobById = async (req, res, next) => {
   const job = await Job.findById(req.params.id).populate([
     'category',
     'type',
     'createdJob',
   ])
+  if (!job) return next(new NotFoundError('Job not found'))
   res.status(200).json(job)
 }
 
-exports.updateJob = async (req, res) => {
+exports.updateJob = async (req, res, next) => {
   const job = await Job.findByIdAndUpdate(
     req.params.id,
     { $set: req.body },
@@ -74,13 +75,13 @@ exports.updateJob = async (req, res) => {
   res.status(200).json({ msg: 'Job updated successfully', newData: job })
 }
 
-exports.deleteJob = async (req, res) => {
+exports.deleteJob = async (req, res, next) => {
   await Job.findByIdAndDelete(req.params.id)
   res.status(200).json('Job deleted successfully')
 }
 
 // Get All Jobs For Employer By ID Employer
-exports.getAllJobsByIdEmployer = async (req, res) => {
+exports.getAllJobsByIdEmployer = async (req, res, next) => {
   const jobsForEmployerById = await Job.find({
     createdJob: req.user.userId,
   }).populate(['category', 'type', 'createdJob'])

@@ -1,24 +1,24 @@
-const mongoose = require("mongoose");
-let DevMode = true;
+const mongoose = require('mongoose')
+let DevMode = false
 
 const OPTIONS_MONGODB = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-};
+}
 
 const initialMongoDBConnection = () => {
-  mongoose.set("strictQuery", false);
+  mongoose.set('strictQuery', false)
 
   switch (DevMode) {
     case true:
-      const uriDatabase = process.env.MONGODB_URI_DEV;
+      const uriDatabase = process.env.MONGODB_URI_DEV
       mongoose
         .connect(uriDatabase, OPTIONS_MONGODB)
-        .then(() => console.log("💻 MongoDB Connected (Development Mode)"))
+        .then(() => console.log('💻 MongoDB Connected (Development Mode)'))
         .catch((err) =>
-          console.log("Not Connected To Database (Development Mode)")
-        );
-      break;
+          console.log('Not Connected To Database (Development Mode)'),
+        )
+      break
 
     case false:
       const mongoDBProduction = {
@@ -26,25 +26,23 @@ const initialMongoDBConnection = () => {
         username: process.env.MONGO_ATLAS_USERNAME,
         password: process.env.MONGO_ATLAS_PASSWORD,
         database: process.env.MONGO_ATLAS_DATABASE,
-      };
+      }
 
       const uri = mongoDBProduction.base_uri
-        .replace("<username>", mongoDBProduction.username)
-        .replace("<password>", mongoDBProduction.password)
-        .replace("<database>", mongoDBProduction.database);
+        .replace('<username>', mongoDBProduction.username)
+        .replace('<password>', mongoDBProduction.password)
+        .replace('<database>', mongoDBProduction.database)
 
       mongoose
         .connect(uri, OPTIONS_MONGODB)
-        .then(() => console.log("💻 MongoDB Connected (Production Mode)"))
-        .catch(() =>
-          console.log("Not Connected To Database (Production Mode)")
-        );
-      break;
+        .then(() => console.log('💻 MongoDB Connected (Production Mode)'))
+        .catch(() => console.log('Not Connected To Database (Production Mode)'))
+      break
 
     default:
-      console.log("Please set DevMode to True or False");
-      break;
+      console.log('Please set DevMode to True or False')
+      break
   }
-};
+}
 
-module.exports = initialMongoDBConnection;
+module.exports = initialMongoDBConnection

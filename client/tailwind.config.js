@@ -4,14 +4,6 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
-  // theme: {
-  //   extend: {
-  //     colors: {
-  //       primary: "#0056fb",
-  //       secondary: "#272d2e",
-  //     },
-  //   },
-  // },
   theme: {
     extend: {
       colors: {
@@ -28,42 +20,6 @@ module.exports = {
           900: "#1e3a8a",
         },
       },
-    },
-    fontFamily: {
-      body: [
-        "Inter",
-        "ui-sans-serif",
-        "system-ui",
-        "-apple-system",
-        "system-ui",
-        "Segoe UI",
-        "Roboto",
-        "Helvetica Neue",
-        "Arial",
-        "Noto Sans",
-        "sans-serif",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji",
-      ],
-      sans: [
-        "Inter",
-        "ui-sans-serif",
-        "system-ui",
-        "-apple-system",
-        "system-ui",
-        "Segoe UI",
-        "Roboto",
-        "Helvetica Neue",
-        "Arial",
-        "Noto Sans",
-        "sans-serif",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji",
-      ],
     },
   },
   plugins: [require("flowbite/plugin")],
